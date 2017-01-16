@@ -1,5 +1,7 @@
 package br.com.treinar.caixa.modelo;
 
+import java.util.Date;
+
 public class Conta {
 
 	public Double saldo;
@@ -14,5 +16,17 @@ public class Conta {
 		Double saldoDisponivel = saldo + limiteCredito;
 		return saldoDisponivel;
 	}
+	
+	public Double consultarSaldo(int mes) {
+		Double saldoDisponivel = saldo + limiteCredito * mes;
+		return saldoDisponivel;
+	}
+	
+	public Double consultarSaldo(int mes, Date data) {
+		Double saldoDisponivel = saldo + limiteCredito * mes;
+		return saldoDisponivel;
+	}
+	
+	
 	
 }
