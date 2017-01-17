@@ -1,4 +1,4 @@
-package br.com.treinar.caixa.modelo.visao;
+package br.com.treinar.caixa.visao;
 
 public class Main {
 

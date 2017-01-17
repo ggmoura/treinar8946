@@ -7,7 +7,7 @@ public class TesteMetodoConsultarSaldo {
 	public static void main(String[] args) {
 		Conta conta = new Conta();
 		conta.saldo = 0.0;
-		conta.limiteCredito = 300d;
+		conta.atribuirLimiteCredito(300d);
 		
 		System.out.println("Saldo antes do depósito: " + conta.saldo);
 		conta.depositar(1000.0);
