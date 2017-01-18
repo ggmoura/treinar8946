@@ -7,12 +7,15 @@ public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo 
 	private Double limiteCredito;
 	public Double taxaManutencao;
 	
-	
+	//sobreescreve o metodo depositar contido na classe pai
+	//alterando o funcionamento para as especificações necessarias em uma conta corrente
 	@Override
-	public void depositar(Double valor) {
+	public void depositar(Double valor) { 
 		saldo = saldo + (valor - 1);
 	}
 	
+	//sobreescreve o metodo consultarSaldo contido na classe pai
+	//alterando o funcionamento para as especificações necessarias em uma conta corrente
 	@Override
 	public Double consultarSaldo() {
 		//O Operador super acessa recursos da classe pai
@@ -20,6 +23,8 @@ public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo 
 		return saldoConta + limiteCredito;
 	}
 	
+	//adiciona o metodo respectivo a classe conta corrente
+	//para definir um limite de credito
 	public void atribuirLimiteCredito(Double limiteCredito) {
 		if (limiteCredito != null && limiteCredito >= 300) {
 			this.limiteCredito = limiteCredito;
@@ -28,6 +33,8 @@ public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo 
 		}
 	}
 	
+	//adiciona o metodo respectivo a classe conta corrente
+	//para retornar o limite de credito
 	public Double pegarLimiteCredito() {
 		return limiteCredito;
 	}
