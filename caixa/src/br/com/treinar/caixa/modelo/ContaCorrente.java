@@ -23,7 +23,7 @@ public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo 
 		return saldoConta + limiteCredito;
 	}
 	
-	//adiciona o metodo respectivo a classe conta corrente
+	//adiciona o metodo que é peculiar a classe conta corrente
 	//para definir um limite de credito
 	public void atribuirLimiteCredito(Double limiteCredito) {
 		if (limiteCredito != null && limiteCredito >= 300) {
@@ -33,7 +33,7 @@ public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo 
 		}
 	}
 	
-	//adiciona o metodo respectivo a classe conta corrente
+	//adiciona o metodo que é peculiar a classe conta corrente
 	//para retornar o limite de credito
 	public Double pegarLimiteCredito() {
 		return limiteCredito;
