@@ -76,7 +76,7 @@ public class MenuCaixa {
 		c = new ContaInvestimento();
 		//chama o metodo cadastrarConta passando o objeto da conta
 		//a ser criada
-		cadastrarConta(c); //metodo na linha 111
+		cadastrarConta(c);
 		System.out.println("Informe a taxa de manutenção");
 		//faz um cast do objeto c e o atribui a variavel do tipo ContaInvestimento
 		//para poder utilizar os metodos e variaveis especificas da classe ContaInvestimento
