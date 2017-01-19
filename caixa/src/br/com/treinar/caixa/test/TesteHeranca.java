@@ -10,29 +10,29 @@ public class TesteHeranca {
 	public static void main(String[] args) {
 		ContaCorrente cc = new ContaCorrente(); //instancia um obj do tipo ContaCorrente
 		cc.atribuirLimiteCredito(400d); //atribui um limite de credito ao objeto
-		cc.saldo = 1000.0; //define o saldo do objeto conta corrente
+		cc.depositar(1000.0); //define o saldo do objeto conta corrente
 		
 		System.out.println(cc.consultarSaldo());
 		
-		ContaPoupanca cp = new ContaPoupanca(); //instancia um obj do tipo ContaPoupança
-		cp.saldo = 10000D; //define o saldo do objeto conta poupança
+		ContaPoupanca cp = new ContaPoupanca(); //instancia um obj do tipo ContaPoupanï¿½a
+		cp.depositar(10000D); //define o saldo do objeto conta poupanï¿½a
 		System.out.println(cp.consultarSaldo());
 		
 		//instancia um objeto do tipo conta que tem seus metodos limitados
 		//apenas a aqueles contidos na classe conta, cuja funcionalidade especifica
 		//foi redefinida na classe conta corrente
 		Conta c = new ContaCorrente();
-		c.saldo = 100.0; //define um saldo para o objeto Conta
+		c.depositar(100.0); //define um saldo para o objeto Conta
 		c.cliente = new Cliente(); //atribui um cliente a conta
 		
 		//Casting (convertendo a variavel conta para contacorrente)
 		((ContaCorrente)c).atribuirLimiteCredito(100.0);
 		//reutiliza o objeto c do tipo conta para criar um novo objeto com as funcionalidades
-		//especificas de uma conta poupança, cujas funcionalidades especificas
-		//foram definidas na classe conta poupança e tem seu metodos limitados apenas a aqueles
+		//especificas de uma conta poupanï¿½a, cujas funcionalidades especificas
+		//foram definidas na classe conta poupanï¿½a e tem seu metodos limitados apenas a aqueles
 		//contidos na classe pai
-		//ou seja, os metodos ADICIONADOS a classe especifica, não são visiveis para o programa
-		//a menos que se faça cast
+		//ou seja, os metodos ADICIONADOS a classe especifica, nï¿½o sï¿½o visiveis para o programa
+		//a menos que se faï¿½a cast
 		c = new ContaPoupanca();
 		
 		
