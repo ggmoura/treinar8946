@@ -1,21 +1,22 @@
 package br.com.treinar.caixa.modelo;
 
 import br.com.treinar.caixa.modelo.caixa.Conta;
+import br.com.treinar.caixa.modelo.caixa.IPagavel;
 
-public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo da classe herdada
+public class ContaCorrente extends Conta implements IPagavel {//define heranca, reaproveitar codigo da classe herdada
 
 	private Double limiteCredito;
 	public Double taxaManutencao;
 	
 	//sobreescreve o metodo depositar contido na classe pai
-	//alterando o funcionamento para as especificações necessarias em uma conta corrente
+	//alterando o funcionamento para as especificaï¿½ï¿½es necessarias em uma conta corrente
 	@Override
 	public void depositar(Double valor) { 
 		saldo = saldo + (valor - 1);
 	}
 	
 	//sobreescreve o metodo consultarSaldo contido na classe pai
-	//alterando o funcionamento para as especificações necessarias em uma conta corrente
+	//alterando o funcionamento para as especificaï¿½ï¿½es necessarias em uma conta corrente
 	@Override
 	public Double consultarSaldo() {
 		//O Operador super acessa recursos da classe pai
@@ -23,21 +24,41 @@ public class ContaCorrente extends Conta {//define heranca, reaproveitar codigo 
 		return saldoConta + limiteCredito;
 	}
 	
-	//adiciona o metodo que é peculiar a classe conta corrente
+	//adiciona o metodo que ï¿½ peculiar a classe conta corrente
 	//para definir um limite de credito
 	public void atribuirLimiteCredito(Double limiteCredito) {
 		if (limiteCredito != null && limiteCredito >= 300) {
 			this.limiteCredito = limiteCredito;
 		} else {
-			limiteCredito = 300d;
+			this.limiteCredito = 300d;
 		}
 	}
 	
-	//adiciona o metodo que é peculiar a classe conta corrente
+	//adiciona o metodo que ï¿½ peculiar a classe conta corrente
 	//para retornar o limite de credito
 	public Double pegarLimiteCredito() {
 		return limiteCredito;
 	}
 	
+	/**
+	 * Metodo para efetuar saque, diminui do saldo da conta
+	 * o valor informado no parametro
+	 * 
+	 * @param valor - valor a ser sacado 
+	 */
+	@Override
+	public Boolean sacar(Double valor) {
+		Boolean retorno = false;
+		if (saldo + limiteCredito >= valor) {
+			saldo -= valor;
+			retorno = true;
+		}
+		return retorno;
+	}
+
+	@Override
+	public void tarifar() {
+		sacar(taxaManutencao);
+	}
 	
 }

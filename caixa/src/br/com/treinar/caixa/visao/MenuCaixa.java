@@ -7,6 +7,8 @@ import br.com.treinar.caixa.modelo.ContaCorrente;
 import br.com.treinar.caixa.modelo.ContaInvestimento;
 import br.com.treinar.caixa.modelo.ContaPoupanca;
 import br.com.treinar.caixa.modelo.caixa.Conta;
+import br.com.treinar.caixa.modelo.caixa.ICaptalizavel;
+import br.com.treinar.caixa.modelo.caixa.IPagavel;
 
 public class MenuCaixa {
 	
@@ -27,22 +29,62 @@ public class MenuCaixa {
 			leitor.nextLine();
 			
 			switch (opcao) {
-			case 1: //caso opção seja 1, chama o metodo criarConta
+			case 1: //caso opï¿½ï¿½o seja 1, chama o metodo criarConta
 				criarConta(); 
 				break;
-			case 2: //caso opção seja 2, chama o metodo exibirDadosConta
+			case 2: //caso opï¿½ï¿½o seja 2, chama o metodo exibirDadosConta
 				exibirDadosConta(); 
+			case 3: //caso opcao seja 2, chama o metodo exibirDadosConta
+				tarifarConta(); 
+				break;
+			case 4: 
+				captalizar(); 
+			case 5: 
+				depositar(); 
+			case 6: 
+				sacar(); 
 				break;
 			default:
+				System.out.println("OpÃ§Ã£o invÃ¡lida...");
 				break;
 			}
 		} while (!opcao.equals(0)); //repete enquanto opcao for diferente de 0
 		
 	}
 	
+	private void sacar() {
+		System.out.print("Informe o valor a ser sacado: ");
+		//Polimorfismo: capacidade que um objeto tem de comportar de maneiras diferentes em tempo de execucao
+		Boolean sacou = c.sacar(leitor.nextDouble());
+		if (sacou) {
+			System.out.println("Sacou");
+		} else {
+			System.out.println("deu ruim...");
+		}
+	}
+
+	private void depositar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void tarifarConta() {
+		if (c instanceof IPagavel) {//verifica se o objeto eh uma instancia de uma determinada classe ou interface
+			((IPagavel) c).tarifar();
+		}
+	}
+
+	private void captalizar() {
+		if (c instanceof ICaptalizavel) {
+			ICaptalizavel iCaptalizavel = (ICaptalizavel) c;
+			iCaptalizavel.captalizar();
+		}
+	}
+	
 	private void exibirDadosConta() {
-		System.out.println(c.cliente.nome);
-		//System.out.println(c.pegarLimiteCredito());
+		System.out.println(c.cliente.getNome());
+		System.out.println(c.cliente.getEndereco());
+		System.out.println(c.cliente);
 	}
 
 	private void criarConta() {
@@ -81,7 +123,7 @@ public class MenuCaixa {
 		//faz um cast do objeto c e o atribui a variavel do tipo ContaInvestimento
 		//para poder utilizar os metodos e variaveis especificas da classe ContaInvestimento
 		ContaInvestimento contaInvestimento = (ContaInvestimento)c;
-		contaInvestimento.taxaManutencao = leitor.nextDouble(); //define a taxa de manutenção que é especifica de uma conta investimento
+		contaInvestimento.taxaManutencao = leitor.nextDouble(); //define a taxa de manutenï¿½ï¿½o que ï¿½ especifica de uma conta investimento
 		System.out.println("Informe a taxa de rendimento");
 		contaInvestimento.taxaRendimento = leitor.nextDouble(); //define uma taxa de rendimento
 	}
@@ -117,6 +159,10 @@ public class MenuCaixa {
 	public String recuperarMenu() {
 		String menu =	"1 - Criar Conta\n" 
 					  + "2 - Exibir dados da Conta\n"
+					  + "3 - Tarifar Conta\n"
+					  + "4 - Captalizar Conta\n"
+					  + "5 - Depositar\n"
+					  + "6 - Sacar\n"
 					  + " => ";
 		return menu;
 	}
@@ -124,15 +170,15 @@ public class MenuCaixa {
 	
 	public void cadastrarConta(Conta conta) {
 		System.out.print("Informe o saldo da conta: ");
-		c.saldo = leitor.nextDouble();
+		conta.depositar(leitor.nextDouble());
 		System.out.print("Informe o nome do cliente: ");
 		leitor.nextLine();
-		c.cliente = new Cliente(); //atribui um novo cliente, a variavel cliente dentro da conta recebida
-		c.cliente.nome = leitor.nextLine(); //atribui o nome do cliente a variavel nome dentro do objeto cliente contido na conta recebida
+		conta.cliente = new Cliente(); //atribui um novo cliente, a variavel cliente dentro da conta recebida
+		conta.cliente.setNome(leitor.nextLine()); //atribui o nome do cliente a variavel nome dentro do objeto cliente contido na conta recebida
 		System.out.print("Informe o endereco do cliente: ");
-		c.cliente.endereco = leitor.nextLine(); //atribui o endereço do cliente a variavel endereço dentro do objeto cliente contido na conta recebida
+		conta.cliente.setEndereco(leitor.nextLine()); //atribui o endereï¿½o do cliente a variavel endereï¿½o dentro do objeto cliente contido na conta recebida
 		System.out.print("Informe o documento do cliente: ");
-		c.cliente.documento = leitor.nextInt(); //atribui o documento do cliente a variavel documento dentro do objeto cliente contido na conta recebida
+		conta.cliente.setDocumento(leitor.nextInt()); //atribui o documento do cliente a variavel documento dentro do objeto cliente contido na conta recebida
 		//desempilha este metodo e retorna de onde parou no metodo anterior
 	}
 	

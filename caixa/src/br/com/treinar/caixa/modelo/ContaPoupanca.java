@@ -1,16 +1,44 @@
 package br.com.treinar.caixa.modelo;
 
 import br.com.treinar.caixa.modelo.caixa.Conta;
+import br.com.treinar.caixa.modelo.caixa.ICaptalizavel;
 
-public class ContaPoupanca extends Conta {
+public class ContaPoupanca extends Conta implements ICaptalizavel {
 
-	public Float taxaRendimento;
+	public static Float taxaRendimento;
+	
+	static {
+		taxaRendimento = 10f;
+	}
+	
+	static {
+		taxaRendimento = 0f;
+	}
 	
 	//sobreescreve o metodo depositar contido na classe pai
-	//alterando o funcionamento para as especificações necessarias em uma conta poupança
+	//alterando o funcionamento para as especificaï¿½ï¿½es necessarias em uma conta poupanï¿½a
 	@Override
 	public void depositar(Double valor) {
 		saldo += valor;
+	}
+	
+	public Boolean sacar(Double valor) {
+		Boolean sacou = Boolean.FALSE;
+		if (saldo >= valor) {
+			saldo -= valor;
+			sacou = Boolean.TRUE;
+		}
+		return sacou;
+	}
+	
+	@Override
+	public void captalizar() {
+		depositar(saldo * taxaRendimento);
+	}
+	
+	public static Float recuperarTaxaRendimento() {
+		
+		return taxaRendimento;
 	}
 	
 }
