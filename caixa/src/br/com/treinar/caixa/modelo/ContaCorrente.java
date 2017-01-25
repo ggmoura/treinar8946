@@ -52,7 +52,7 @@ public class ContaCorrente extends Conta implements IPagavel {//define heranca, 
 			saldo -= valor;
 		} else {
 			SaldoInsuficienteException excecao = new SaldoInsuficienteException();
-			excecao.setSaldoAtual(saldo);
+			excecao.setSaldoAtual(consultarSaldo());
 			throw excecao;
 		}
 	}
