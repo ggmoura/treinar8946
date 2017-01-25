@@ -16,9 +16,8 @@ public class ContaInvestimento extends Conta implements IPagavel, ICaptalizavel 
 		// TODO Auto-generated method stub
 		
 	}
-	public Boolean sacar(Double valor) {
+	public void sacar(Double valor) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	@Override

@@ -47,18 +47,23 @@ public class ContaCorrente extends Conta implements IPagavel {//define heranca, 
 	 * @param valor - valor a ser sacado 
 	 */
 	@Override
-	public Boolean sacar(Double valor) {
-		Boolean retorno = false;
+	public void sacar(Double valor) throws SaldoInsuficienteException {
 		if (saldo + limiteCredito >= valor) {
 			saldo -= valor;
-			retorno = true;
+		} else {
+			SaldoInsuficienteException excecao = new SaldoInsuficienteException();
+			excecao.setSaldoAtual(saldo);
+			throw excecao;
 		}
-		return retorno;
 	}
 
 	@Override
 	public void tarifar() {
-		sacar(taxaManutencao);
+		try {
+			sacar(taxaManutencao);
+		} catch (SaldoInsuficienteException e) {
+			System.out.println("Enviar email");
+		}
 	}
 	
 }

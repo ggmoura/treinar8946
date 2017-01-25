@@ -3,6 +3,7 @@ package br.com.treinar.caixa.modelo.caixa;
 import java.util.Date;
 
 import br.com.treinar.caixa.modelo.Cliente;
+import br.com.treinar.caixa.modelo.SaldoInsuficienteException;
 
 //abstract define que nao eh possivel dar new na classe Conta so pode ser herdada
 public abstract class Conta {
@@ -20,7 +21,7 @@ public abstract class Conta {
 	}
 	public abstract void depositar(Double valor);
 	
-	public abstract Boolean sacar(Double valor);
+	public abstract void sacar(Double valor) throws SaldoInsuficienteException;
 
 	public Double consultarSaldo() {
 		//regra fuzzy...

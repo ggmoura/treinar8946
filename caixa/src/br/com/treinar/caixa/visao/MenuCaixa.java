@@ -6,6 +6,7 @@ import br.com.treinar.caixa.modelo.Cliente;
 import br.com.treinar.caixa.modelo.ContaCorrente;
 import br.com.treinar.caixa.modelo.ContaInvestimento;
 import br.com.treinar.caixa.modelo.ContaPoupanca;
+import br.com.treinar.caixa.modelo.SaldoInsuficienteException;
 import br.com.treinar.caixa.modelo.caixa.Conta;
 import br.com.treinar.caixa.modelo.caixa.ICaptalizavel;
 import br.com.treinar.caixa.modelo.caixa.IPagavel;
@@ -38,15 +39,19 @@ public class MenuCaixa {
 				break;
 			case 2: //caso op��o seja 2, chama o metodo exibirDadosConta
 				exibirDadosConta(); 
+				break;
 			case 3: //caso opcao seja 2, chama o metodo exibirDadosConta
 				tarifarConta(); 
 				break;
 			case 4: 
 				captalizar(); 
+				break;
 			case 5: 
 				depositar(); 
+				break;
 			case 6: 
 				sacar(); 
+				break;
 			case 7: 
 				atualizarTaxaRendimento();
 				break;
@@ -68,17 +73,36 @@ public class MenuCaixa {
 	private void sacar() {
 		System.out.print("Informe o valor a ser sacado: ");
 		//Polimorfismo: capacidade que um objeto tem de comportar de maneiras diferentes em tempo de execucao
-		Boolean sacou = contas[0].sacar(leitor.nextDouble());
-		if (sacou) {
-			System.out.println("Sacou");
-		} else {
-			System.out.println("deu ruim...");
+		try {
+			recuperarConta().sacar(leitor.nextDouble());
+			System.out.println("Sacou belezinha...");
+		} catch (SaldoInsuficienteException e) {
+			System.out.println("Digite 1 - Para tentar novamente e \n2 - Para Finalizar");
+			if (leitor.nextInt() == 1) {
+				sacar();				
+			}
 		}
 	}
 
 	private void depositar() {
-		// TODO Auto-generated method stub
+		Conta c = selecionarConta();
+		leitor.nextLine();
+		System.out.print("Valor: ");
+		c.depositar(leitor.nextDouble());;
+	}
+
+	private Conta selecionarConta() {
+		System.out.println("Digite a posição da conta: ");
+		for (int i = 0; i < contas.length; i++) {
+			//if ternario executa apos a "interrogacao" caso seja verdadeiro e apos os "dois pontos" : se for falso
+			System.out.println(contas[i] != null ? i + " - " + contas[i].cliente.getNome() : "");
+//			if (contas[i] != null) {
+//				System.out.println(" - " + contas[i].cliente.getNome());
+//			}
+		}
+		Integer indice = leitor.nextInt();
 		
+		return contas[indice];
 	}
 
 	private void tarifarConta() {
